@@ -46,15 +46,27 @@
         <!-- Logger listview -->
         <DockPanel Grid.Row="1" Grid.Column="0" LastChildFill="True">
             <Label DockPanel.Dock="Top">Menu</Label>
-            
+            <StackPanel Orientation="Vertical" DockPanel.Dock="Top" Margin="10">
+                <Button Margin="0,0,0,10">Open circuit</Button>
+                <Button Margin="0,0,0,10">Quit</Button>
+            </StackPanel>
         </DockPanel>
         
         <!-- Logger listview -->
         <DockPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" LastChildFill="True">
             <Label DockPanel.Dock="Top">Logger</Label>
-            <ListView DockPanel.Dock="Top">
+            <Grid DockPanel.Dock="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
 
-            </ListView>
+                <ListView Grid.Row="0">
+
+                </ListView>
+
+                <Button Grid.Row="1" Width="100" HorizontalAlignment="Left" Margin="10,10,0,10">Clear log</Button>
+            </Grid>
         </DockPanel>
     </Grid>
 </Window>
