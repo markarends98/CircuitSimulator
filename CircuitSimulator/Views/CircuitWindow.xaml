@@ -8,6 +8,53 @@
         Title="MainWindow" Height="450" Width="800"
         DataContext="{Binding Circuit, Source={StaticResource Locator}}">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Start points listview -->
+        <DockPanel Grid.Row="0" Grid.Column="0" LastChildFill="True">
+            <Label DockPanel.Dock="Top">Startpoints</Label>
+            <ListView DockPanel.Dock="Top">
+                
+            </ListView>
+        </DockPanel>
+
+        <!-- Probes listview -->
+        <DockPanel Grid.Row="0" Grid.Column="1" LastChildFill="True">
+            <Label DockPanel.Dock="Top">Gates</Label>
+            <ListView DockPanel.Dock="Top">
+
+            </ListView>
+        </DockPanel>
+
+        <!-- Gates listview -->
+        <DockPanel Grid.Row="0" Grid.Column="2" LastChildFill="True">
+            <Label DockPanel.Dock="Top">Probes</Label>
+            <ListView DockPanel.Dock="Top">
+
+            </ListView>
+        </DockPanel>
+
+        <!-- Logger listview -->
+        <DockPanel Grid.Row="1" Grid.Column="0" LastChildFill="True">
+            <Label DockPanel.Dock="Top">Menu</Label>
+            
+        </DockPanel>
         
+        <!-- Logger listview -->
+        <DockPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" LastChildFill="True">
+            <Label DockPanel.Dock="Top">Logger</Label>
+            <ListView DockPanel.Dock="Top">
+
+            </ListView>
+        </DockPanel>
     </Grid>
 </Window>
