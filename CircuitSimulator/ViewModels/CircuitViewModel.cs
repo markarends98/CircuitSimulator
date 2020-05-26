@@ -13,12 +13,13 @@ namespace CircuitSimulator.ViewModels
     {
         private FileStrategyFactory fileStrategyFactory;
         private CircuitBuilder circuitBuilder;
-        private Circuit circuit;
+        public Circuit circuit { get; set; }
 
         public CircuitViewModel()
         {
             fileStrategyFactory = FileStrategyFactory.Instance;
             circuitBuilder = new CircuitBuilder();
+            circuit = circuitBuilder.Parse();
         }
     }
 }

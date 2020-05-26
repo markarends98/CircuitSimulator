@@ -33,7 +33,8 @@ namespace CircuitSimulator.ViewModels
             fileStrategyFactory.RegisterStrategy("txt", new TxtFileStrategy());
 
             NodeFactory nodeFactory = NodeFactory.Instance;
-            nodeFactory.RegisterNode<StartPoint>("START");
+            nodeFactory.RegisterNode<InputHigh>("INPUT_HIGH");
+            nodeFactory.RegisterNode<InputLow>("INPUT_LOW");
             nodeFactory.RegisterNode<Probe>("PROBE");
             nodeFactory.RegisterNode<NotGate>("NOT");
             nodeFactory.RegisterNode<AndGate>("AND");

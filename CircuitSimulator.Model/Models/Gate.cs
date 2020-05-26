@@ -6,6 +6,7 @@ namespace CircuitSimulator.Domain.Models
     public abstract class Gate : INode
     {
         public string Name { get; set; }
+        public abstract string Type { get; }
         public bool Output { get => Result(); }
         public INode[] In { get; set; }
         public INode[] Out { get; set; }
