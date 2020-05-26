@@ -22,7 +22,7 @@
         <!-- Start points listview -->
         <DockPanel Grid.Row="0" Grid.Column="0" LastChildFill="True">
             <Label DockPanel.Dock="Top">Startpoints</Label>
-            <ListView DockPanel.Dock="Top">
+            <ListView DockPanel.Dock="Top" Margin="5,0,5,0">
                 
             </ListView>
         </DockPanel>
@@ -30,7 +30,7 @@
         <!-- Probes listview -->
         <DockPanel Grid.Row="0" Grid.Column="1" LastChildFill="True">
             <Label DockPanel.Dock="Top">Gates</Label>
-            <ListView DockPanel.Dock="Top">
+            <ListView DockPanel.Dock="Top" Margin="5,0,5,0">
 
             </ListView>
         </DockPanel>
@@ -38,7 +38,7 @@
         <!-- Gates listview -->
         <DockPanel Grid.Row="0" Grid.Column="2" LastChildFill="True">
             <Label DockPanel.Dock="Top">Probes</Label>
-            <ListView DockPanel.Dock="Top">
+            <ListView DockPanel.Dock="Top" Margin="5,0,5,0">
 
             </ListView>
         </DockPanel>
@@ -61,11 +61,11 @@
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
 
-                <ListView Grid.Row="0">
+                <ListView Grid.Row="0" Margin="5,0,5,0">
 
                 </ListView>
 
-                <Button Grid.Row="1" Width="100" HorizontalAlignment="Left" Margin="10,10,0,10">Clear log</Button>
+                <Button Grid.Row="1" Width="100" HorizontalAlignment="Left" Margin="5,10,0,10">Clear log</Button>
             </Grid>
         </DockPanel>
     </Grid>
