@@ -11,7 +11,7 @@ namespace CircuitSimulator.FileStrategies
 {
     public class JsonFileStrategy : IFileStrategy
     {
-        public List<NodeDefinition> ReadFile(string fileName)
+        public List<NodeDefinition> ReadFile(Stream fileStream)
         {
             // TODO: JsonFileStrategy logic
             throw new NotImplementedException();

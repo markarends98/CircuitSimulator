@@ -10,6 +10,6 @@ namespace CircuitSimulator.Interfaces
 {
     public interface IFileStrategy
     {
-        List<NodeDefinition> ReadFile(string fileName);
+        List<NodeDefinition> ReadFile(Stream fileStream);
     }
 }

@@ -70,6 +70,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Exceptions\DuplicateNodeException.cs" />
+    <Compile Include="Exceptions\DuplicateStrategyException.cs" />
     <Compile Include="ViewModels\CircuitViewModel.cs" />
     <Page Include="Views\CircuitWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

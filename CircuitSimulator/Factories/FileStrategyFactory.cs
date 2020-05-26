@@ -1,4 +1,5 @@
-﻿using CircuitSimulator.Interfaces;
+﻿using CircuitSimulator.Exceptions;
+using CircuitSimulator.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,12 @@ namespace CircuitSimulator.Factories
             if (ext == null || ext == string.Empty || strategy == null)
             {
                 throw new ArgumentException();
-            }    
+            }
+
+            if (Strategies.ContainsKey(ext))
+            {
+                throw new DuplicateStrategyException();
+            }
             Strategies.Add(ext, strategy);
         }
 

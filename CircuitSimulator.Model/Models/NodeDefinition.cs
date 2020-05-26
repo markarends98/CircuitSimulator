@@ -13,6 +13,8 @@ namespace CircuitSimulator.Domain.Models
 
         public NodeDefinition()
         {
+            Name = null;
+            Type = null;
             Inputs = new List<string>();
             Outputs = new List<string>();
         }

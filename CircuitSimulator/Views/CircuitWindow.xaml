@@ -47,7 +47,7 @@
         <DockPanel Grid.Row="1" Grid.Column="0" LastChildFill="True">
             <Label DockPanel.Dock="Top">Menu</Label>
             <StackPanel Orientation="Vertical" DockPanel.Dock="Top" Margin="10">
-                <Button Margin="0,0,0,10">Open circuit</Button>
+                <Button Margin="0,0,0,10" Command="{Binding OpenCircuitCommand}">Open circuit</Button>
                 <Button Margin="0,0,0,10">Quit</Button>
             </StackPanel>
         </DockPanel>
