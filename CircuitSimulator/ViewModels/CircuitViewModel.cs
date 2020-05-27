@@ -2,6 +2,7 @@
 using CircuitSimulator.Domain.Models;
 using CircuitSimulator.Factories;
 using CircuitSimulator.Interfaces;
+using CircuitSimulator.Logs;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Microsoft.Win32;
@@ -11,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CircuitSimulator.ViewModels
 {
@@ -29,31 +31,54 @@ namespace CircuitSimulator.ViewModels
         private FileStrategyFactory _fileStrategyFactory;
         private CircuitBuilder _circuitBuilder;
         private Circuit _circuit;
+        public Logger Logger { get; set; }
 
         #region Commands
         public RelayCommand OpenCircuitCommand { get; set; }
+        public RelayCommand ClearLogsCommand { get; set; }
         #endregion
-
+         
         public CircuitViewModel()
         {
             _fileStrategyFactory = FileStrategyFactory.Instance;
             _circuitBuilder = new CircuitBuilder();
             OpenCircuitCommand = new RelayCommand(OpenCircuit);
+            ClearLogsCommand = new RelayCommand(ClearLogs);
+            Logger = Logger.Instance;
         }
 
         private void OpenCircuit()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            string filter = GetFileFilter();
+            openFileDialog.Filter = filter;
             if (openFileDialog.ShowDialog() == true)
             {
-                string ext = Path.GetExtension(openFileDialog.FileName);
+                string ext = Path.GetExtension(openFileDialog.FileName);;
                 IFileStrategy fileStrategy = _fileStrategyFactory.GetStrategy(ext.Substring(1));
                 if(fileStrategy != null)
                 {
+                    Logger.Log("Parsing file: '" + openFileDialog.FileName + "'");
                     List<NodeDefinition> nodeDefinitions = fileStrategy.ReadFile(openFileDialog.OpenFile());
                     //Circuit = _circuitBuilder.Parse(nodeDefinitions);
+                }else
+                {
+                    Logger.LogError("Cannot parse files with extension: '" + ext + "'");
                 }
             }
+        }
+
+        private string GetFileFilter()
+        {
+            List<string> availableStrategies = _fileStrategyFactory.AvailableStrategies;
+            string extensions = String.Join("", availableStrategies.Select(ext => "*." + ext + ";"));
+            string filter = "Text files (" + extensions + ")|" + extensions;
+            return filter;
+        }
+
+        private void ClearLogs()
+        {
+            Logger.ClearLogs();
         }
     }
 }

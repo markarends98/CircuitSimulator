@@ -31,6 +31,8 @@ namespace CircuitSimulator.Factories
 
         private readonly Dictionary<string, IFileStrategy> Strategies;
 
+        public List<string> AvailableStrategies { get => new List<string>(Strategies.Keys); }
+
         public void RegisterStrategy(string ext, IFileStrategy strategy)
         {
             if (ext == null || ext == string.Empty || strategy == null)

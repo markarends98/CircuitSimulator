@@ -28,6 +28,7 @@ namespace CircuitSimulator.FileStrategies
 
                     if(!parseEdges)
                     {
+                        // parse descriptions
                         NodeDefinition nodeDefinition = new NodeDefinition();
                         string nodeDescription = line;
                         if(nodeDescription.EndsWith(";"))
@@ -40,11 +41,11 @@ namespace CircuitSimulator.FileStrategies
                         if (nodeData.Length > 1)
                             nodeDefinition.Type = nodeData[1].Trim();
                         
-
                         nodeDefinitions.Add(nodeDefinition);
                     }
                     else
                     {
+                        // parse edges
                         string edgeDescription = line;
                         if (edgeDescription.EndsWith(";"))
                             edgeDescription = edgeDescription.Substring(0, edgeDescription.LastIndexOf(';'));
@@ -60,12 +61,11 @@ namespace CircuitSimulator.FileStrategies
                         if (node == null || edgeData.Length <= 1)
                             continue;
 
-                        Console.WriteLine(edgeData[1].Trim());
+                        // connect edges
                         string[] edges = edgeData[1].Trim().Split(',');
                         foreach (string edgeName in edges)
                         {
-                            Console.WriteLine(edgeName);
-                               NodeDefinition edge = nodeDefinitions.FirstOrDefault(nodeDefinition => nodeDefinition.Name == edgeName);
+                            NodeDefinition edge = nodeDefinitions.FirstOrDefault(nodeDefinition => nodeDefinition.Name == edgeName);
                             if (edge == null)
                                 continue;
                             edge.Inputs.Add(node.Name);

@@ -15,6 +15,7 @@
 using CircuitSimulator.Domain.Models;
 using CircuitSimulator.Factories;
 using CircuitSimulator.FileStrategies;
+using CircuitSimulator.ValidationStrategies;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -27,11 +28,12 @@ namespace CircuitSimulator.ViewModels
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            // register factories
+            // register file strategies
             FileStrategyFactory fileStrategyFactory = FileStrategyFactory.Instance;
             fileStrategyFactory.RegisterStrategy("json", new JsonFileStrategy());
             fileStrategyFactory.RegisterStrategy("txt", new TxtFileStrategy());
 
+            // register node types
             NodeFactory nodeFactory = NodeFactory.Instance;
             nodeFactory.RegisterNode<StartPoint>("START");
             nodeFactory.RegisterNode<Probe>("PROBE");
@@ -41,6 +43,10 @@ namespace CircuitSimulator.ViewModels
             nodeFactory.RegisterNode<NorGate>("NOR");
             nodeFactory.RegisterNode<OrGate>("OR");
             nodeFactory.RegisterNode<XorGate>("XOR");
+
+            // register validation strategies
+            ValidationStrategyFactory validationStrategyFactory = ValidationStrategyFactory.Instance;
+            validationStrategyFactory.RegisterStrategy(new LoopValidation());
 
             SimpleIoc.Default.Register<CircuitViewModel>();
         }

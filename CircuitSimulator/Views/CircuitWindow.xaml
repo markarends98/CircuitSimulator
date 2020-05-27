@@ -61,11 +61,15 @@
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
 
-                <ListView Grid.Row="0" Margin="5,0,5,0">
-
+                <ListView Grid.Row="0" Margin="5,0,5,0" ItemsSource="{Binding Logger.Logs}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Message}" Foreground="{Binding TextColor}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
 
-                <Button Grid.Row="1" Width="100" HorizontalAlignment="Left" Margin="5,10,0,10">Clear log</Button>
+                <Button Grid.Row="1" Width="100" HorizontalAlignment="Left" Margin="5,10,0,10" Command="{Binding ClearLogsCommand}">Clear log</Button>
             </Grid>
         </DockPanel>
     </Grid>
