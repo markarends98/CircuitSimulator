@@ -1,5 +1,6 @@
 ﻿using CircuitSimulator.Domain.Models;
 using CircuitSimulator.Interfaces;
+using CircuitSimulator.Logs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,16 @@ namespace CircuitSimulator.ValidationStrategies
 {
     public class LoopValidation : IValidationStrategy
     {
+        public Logger Logger { get; }
+
+        public LoopValidation()
+        {
+            Logger = Logger.Instance;
+        }
+
         public bool Validate(List<NodeDefinition> nodeDefinitions)
         {
-            throw new NotImplementedException();
+            return false;
         }
     }
 }

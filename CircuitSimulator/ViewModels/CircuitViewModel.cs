@@ -29,6 +29,7 @@ namespace CircuitSimulator.ViewModels
         }
 
         private FileStrategyFactory _fileStrategyFactory;
+        public ValidationStrategyFactory _validationStrategyFactory;
         private CircuitBuilder _circuitBuilder;
         private Circuit _circuit;
         public Logger Logger { get; set; }
@@ -41,6 +42,7 @@ namespace CircuitSimulator.ViewModels
         public CircuitViewModel()
         {
             _fileStrategyFactory = FileStrategyFactory.Instance;
+            _validationStrategyFactory = ValidationStrategyFactory.Instance;
             _circuitBuilder = new CircuitBuilder();
             OpenCircuitCommand = new RelayCommand(OpenCircuit);
             ClearLogsCommand = new RelayCommand(ClearLogs);
@@ -58,10 +60,21 @@ namespace CircuitSimulator.ViewModels
                 IFileStrategy fileStrategy = _fileStrategyFactory.GetStrategy(ext.Substring(1));
                 if(fileStrategy != null)
                 {
-                    Logger.Log("Parsing file: '" + openFileDialog.FileName + "'");
+                    Logger.Log("Reading file: '" + openFileDialog.FileName + "'");
                     List<NodeDefinition> nodeDefinitions = fileStrategy.ReadFile(openFileDialog.OpenFile());
-                    //Circuit = _circuitBuilder.Parse(nodeDefinitions);
-                }else
+
+                    Logger.Log("Validating file: '" + openFileDialog.FileName + "'");
+                    List<IValidationStrategy> validationStrategies = _validationStrategyFactory.GetStrategies();
+                    foreach(IValidationStrategy validationStrategy in validationStrategies)
+                    {
+                        bool result = validationStrategy.Validate(nodeDefinitions);
+                        if (!result)
+                        {
+                            break;
+                        }
+                    }
+                }
+                else
                 {
                     Logger.LogError("Cannot parse files with extension: '" + ext + "'");
                 }

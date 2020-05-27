@@ -1,5 +1,6 @@
 ﻿using CircuitSimulator.Domain.Models;
 using CircuitSimulator.Interfaces;
+using CircuitSimulator.Logs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,23 @@ namespace CircuitSimulator.ValidationStrategies
 {
     public class DuplicateGateValidation : IValidationStrategy
     {
+        public Logger Logger { get; }
+
+        public DuplicateGateValidation()
+        {
+            Logger = Logger.Instance;
+        }
+
         public bool Validate(List<NodeDefinition> nodeDefinitions)
         {
-            throw new NotImplementedException();
+            bool hasDuplicateGates = nodeDefinitions.GroupBy(x => x.Name)
+              .Where(g => g.Count() > 1)
+              .Any();
+            if (hasDuplicateGates)
+            {
+                Logger.LogError("circuit has gates with duplicate names.");
+            }
+            return !hasDuplicateGates;
         }
     }
 }

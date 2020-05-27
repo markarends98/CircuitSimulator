@@ -79,7 +79,9 @@
     <Compile Include="Interfaces\IValidationStrategy.cs" />
     <Compile Include="Logs\Log.cs" />
     <Compile Include="Logs\Logger.cs" />
-    <Compile Include="ValidationStrategies\LoopValidationStrategy.cs" />
+    <Compile Include="ValidationStrategies\ValidGatesValidation.cs" />
+    <Compile Include="ValidationStrategies\DuplicateGatesValidation.cs" />
+    <Compile Include="ValidationStrategies\LoopValidation.cs" />
     <Compile Include="ViewModels\CircuitViewModel.cs" />
     <Page Include="Views\CircuitWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

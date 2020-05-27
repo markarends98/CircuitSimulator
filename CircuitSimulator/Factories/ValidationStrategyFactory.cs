@@ -44,5 +44,10 @@ namespace CircuitSimulator.Factories
             }
             Strategies.Add(strategy);
         }
+
+        public List<IValidationStrategy> GetStrategies()
+        {
+            return new List<IValidationStrategy>(Strategies);
+        }
     }
 }

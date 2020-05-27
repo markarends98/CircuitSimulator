@@ -35,10 +35,10 @@ namespace CircuitSimulator.FileStrategies
                             nodeDescription = nodeDescription.Substring(0, nodeDescription.LastIndexOf(';'));
 
                         string[] nodeData = nodeDescription.Split(':');
-                        if(nodeData.Length > 0)
+                        if(nodeData.Length > 0 && nodeData[0] != null && nodeData[0].Trim().Length > 0)
                             nodeDefinition.Name = nodeData[0].Trim();
 
-                        if (nodeData.Length > 1)
+                        if (nodeData.Length > 1 && nodeData[1] != null && nodeData[1].Trim().Length > 0)
                             nodeDefinition.Type = nodeData[1].Trim();
                         
                         nodeDefinitions.Add(nodeDefinition);
