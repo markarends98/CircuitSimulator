@@ -20,7 +20,31 @@ namespace CircuitSimulator.ValidationStrategies
 
         public bool Validate(List<NodeDefinition> nodeDefinitions)
         {
-            return false;
+            foreach(NodeDefinition nodeDefinition in nodeDefinitions)
+            {
+                if(nodeDefinition.Visited)
+                {
+                    Logger.LogError("infinte loop detected");
+                    return false;
+                }
+
+                foreach (string node in nodeDefinition.Outputs)
+                {
+                    NodeDefinition edge = nodeDefinitions.FirstOrDefault(ndf => ndf.Name == node);
+                    if(edge != null)
+                    {
+                        if (edge.Visited)
+                        {
+                            Logger.LogError("infinte loop detected");
+                            return false;
+                        }
+
+                        edge.Visited = true;
+                    }
+                }
+                nodeDefinition.Visited = true;
+            }
+            return true;
         }
     }
 }

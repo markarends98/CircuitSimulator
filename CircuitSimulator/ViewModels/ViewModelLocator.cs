@@ -35,14 +35,14 @@ namespace CircuitSimulator.ViewModels
 
             // register node types
             NodeFactory nodeFactory = NodeFactory.Instance;
-            nodeFactory.RegisterNode<StartPoint>("START");
-            nodeFactory.RegisterNode<Probe>("PROBE");
-            nodeFactory.RegisterNode<NotGate>("NOT");
-            nodeFactory.RegisterNode<AndGate>("AND");
-            nodeFactory.RegisterNode<NandGate>("NAND");
-            nodeFactory.RegisterNode<NorGate>("NOR");
-            nodeFactory.RegisterNode<OrGate>("OR");
-            nodeFactory.RegisterNode<XorGate>("XOR");
+            nodeFactory.RegisterNode<StartPoint, StartPoint>("START");
+            nodeFactory.RegisterNode<Probe, Probe>("PROBE");
+            nodeFactory.RegisterNode<NotGate, Gate>("NOT");
+            nodeFactory.RegisterNode<AndGate, Gate>("AND");
+            nodeFactory.RegisterNode<NandGate, Gate>("NAND");
+            nodeFactory.RegisterNode<NorGate, Gate>("NOR");
+            nodeFactory.RegisterNode<OrGate, Gate>("OR");
+            nodeFactory.RegisterNode<XorGate, Gate>("XOR");
 
             // register validation strategies
             ValidationStrategyFactory validationStrategyFactory = ValidationStrategyFactory.Instance;
