@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CircuitSimulator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="450" Width="1400"
         DataContext="{Binding Circuit, Source={StaticResource Locator}}">
     <Grid>
         <Grid.RowDefinitions>
@@ -28,8 +28,15 @@
                         <TextBlock>
                             <Run Text="{Binding Name}" />
                             <Run xml:space="preserve" Text="&#x09;| " />
-                            <Run Text=" Output=[" />
-                            <Run Text="x ]" />
+                            <Run Text=" OutputNodes=[" />
+                            <ItemsControl ItemsSource="{ Binding Out }">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <Run Text="]" />
                         </TextBlock>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -44,8 +51,31 @@
                     <DataTemplate>
                         <TextBlock>
                             <Run Text="{Binding Name}" />
+                            <Run xml:space="preserve" Text="&#x09;| " />
                             <Run Text=" [" />
                             <Run Text="{Binding Type, Mode=OneWay}" />
+                            <Run Text="]" />
+                            <Run xml:space="preserve" Text="&#x09;| " />
+                            <Run Text=" InputNodes=[" />
+                            <ItemsControl ItemsSource="{ Binding In }">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <Run Text="]" />
+                            <Run xml:space="preserve" Text="&#x09;| " />
+                            <Run Text=" OutputNodes=[" />
+                            <ItemsControl ItemsSource="{ Binding Out }">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                             <Run Text="]" />
                         </TextBlock>
                     </DataTemplate>
@@ -59,7 +89,13 @@
             <ListView DockPanel.Dock="Top" Margin="5,0,5,0" ItemsSource="{ Binding Circuit.Probes }">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock>
+                            <Run Text="{Binding Name}" />
+                            <Run xml:space="preserve" Text="&#x09;| " />
+                            <Run Text=" InputNodes=[" />
+                            <Run Text="{Binding Input.Name}" />
+                            <Run Text="]" />
+                        </TextBlock>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
