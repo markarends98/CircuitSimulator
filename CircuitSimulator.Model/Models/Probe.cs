@@ -8,9 +8,14 @@ namespace CircuitSimulator.Domain.Models
         public bool Output { get => Result(); }
         public INode Input { get; private set; }
 
-        public void ConnectTo(INode node)
+        public void ConnectInput(INode node)
         {
             Input = node;
+        }
+
+        public void ConnectOutput(INode node)
+        {
+            return;
         }
 
         public void Init(string name, int ins, int outs)

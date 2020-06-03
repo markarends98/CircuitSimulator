@@ -5,7 +5,8 @@
         string Name { get; set; } 
         bool Output { get; }
         void Init(string name, int ins, int outs);
-        void ConnectTo(INode node);
+        void ConnectInput(INode node);
+        void ConnectOutput(INode node);
         bool Result();
     }
 }

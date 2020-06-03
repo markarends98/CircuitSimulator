@@ -48,10 +48,28 @@ namespace CircuitSimulator.Builders
 
             ObservableCollection<INode> nodes = new ObservableCollection<INode>();
 
-            nodeDefinitions.ForEach(node =>
+            nodeDefinitions.ForEach(nodeDefinition =>
             {
-                nodes.Add(nodeFactory.CreateNode(node));
+                nodes.Add(nodeFactory.CreateNode(nodeDefinition));
             });
+
+            foreach(INode node in nodes)
+            {
+                NodeDefinition nodeDefinition = nodeDefinitions.FirstOrDefault(tempNodeDefinition => tempNodeDefinition.Name.Equals(node.Name));
+
+                if (nodeDefinition != null)
+                {
+                    nodeDefinition.Inputs.ForEach(inputName =>
+                    {
+                        node.ConnectInput(nodes.FirstOrDefault(inputNode => inputNode.Name.Equals(inputName)));
+                    });
+
+                    nodeDefinition.Outputs.ForEach(outputName =>
+                    {
+                        node.ConnectOutput(nodes.FirstOrDefault(outputNode => outputNode.Name.Equals(outputName)));
+                    });
+                }
+            }
 
             return new Circuit(nodes);
         }
