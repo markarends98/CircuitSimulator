@@ -79,6 +79,7 @@
     <Compile Include="Interfaces\IValidationStrategy.cs" />
     <Compile Include="Logs\Log.cs" />
     <Compile Include="Logs\Logger.cs" />
+    <Compile Include="ValidationStrategies\NodeConnnectionsValidation.cs" />
     <Compile Include="ValidationStrategies\ValidGatesValidation.cs" />
     <Compile Include="ValidationStrategies\DuplicateGatesValidation.cs" />
     <Compile Include="ValidationStrategies\LoopValidation.cs" />

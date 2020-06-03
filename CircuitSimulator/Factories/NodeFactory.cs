@@ -1,5 +1,6 @@
 ﻿using CircuitSimulator.Domain.Interfaces;
 using CircuitSimulator.Domain.Models;
+using CircuitSimulator.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,11 @@ namespace CircuitSimulator.Factories
             {
                 throw new ArgumentException();
             }
+
+            if(IsNodeRegistered(type))
+            {
+                throw new DuplicateNodeException();
+            }
             RegisteredNodes.Add(type, typeof(Class));
             NodeTypes.Add(type, typeof(Type).Name);
         }
@@ -64,6 +70,11 @@ namespace CircuitSimulator.Factories
                 return NodeTypes[nodeDefinition.Type];
             }
             return null;
+        }
+
+        public bool IsNodeRegistered(string type)
+        {
+            return RegisteredNodes.ContainsKey(type);
         }
     }
 }

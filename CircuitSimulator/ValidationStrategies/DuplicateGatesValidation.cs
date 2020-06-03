@@ -26,8 +26,9 @@ namespace CircuitSimulator.ValidationStrategies
             if (hasDuplicateGates)
             {
                 Logger.LogError("circuit has gates with duplicate names.");
+                return false;
             }
-            return !hasDuplicateGates;
+            return true;
         }
     }
 }

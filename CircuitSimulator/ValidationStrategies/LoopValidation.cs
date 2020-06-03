@@ -1,4 +1,5 @@
 ﻿using CircuitSimulator.Domain.Models;
+using CircuitSimulator.Factories;
 using CircuitSimulator.Interfaces;
 using CircuitSimulator.Logs;
 using System;
@@ -12,37 +13,22 @@ namespace CircuitSimulator.ValidationStrategies
     public class LoopValidation : IValidationStrategy
     {
         public Logger Logger { get; }
+        public NodeFactory _nodeFactory;
 
         public LoopValidation()
         {
             Logger = Logger.Instance;
+            _nodeFactory = NodeFactory.Instance;
         }
 
         public bool Validate(List<NodeDefinition> nodeDefinitions)
         {
+            List<List<string>> Paths = new List<List<string>>();
+
             foreach(NodeDefinition nodeDefinition in nodeDefinitions)
             {
-                if(nodeDefinition.Visited)
-                {
-                    Logger.LogError("infinte loop detected");
-                    return false;
-                }
+                string currentNode = nodeDefinition.Name;
 
-                foreach (string node in nodeDefinition.Outputs)
-                {
-                    NodeDefinition edge = nodeDefinitions.FirstOrDefault(ndf => ndf.Name == node);
-                    if(edge != null)
-                    {
-                        if (edge.Visited)
-                        {
-                            Logger.LogError("infinte loop detected");
-                            return false;
-                        }
-
-                        edge.Visited = true;
-                    }
-                }
-                nodeDefinition.Visited = true;
             }
             return true;
         }

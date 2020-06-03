@@ -49,7 +49,8 @@ namespace CircuitSimulator.ViewModels
             ValidationStrategyFactory validationStrategyFactory = ValidationStrategyFactory.Instance;
             validationStrategyFactory.RegisterStrategy(new ValidGatesValidation());
             validationStrategyFactory.RegisterStrategy(new DuplicateGateValidation());
-            //validationStrategyFactory.RegisterStrategy(new LoopValidation());
+            validationStrategyFactory.RegisterStrategy(new NodeConnnectionsValidation());
+            validationStrategyFactory.RegisterStrategy(new LoopValidation());
 
 
             SimpleIoc.Default.Register<CircuitViewModel>();
