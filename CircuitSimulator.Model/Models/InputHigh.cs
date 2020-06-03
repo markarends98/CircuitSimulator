@@ -5,14 +5,16 @@ using System.Text;
 
 namespace CircuitSimulator.Domain.Models
 {
-    public class XorGate : Gate
+    public class InputHigh : StartPoint
     {
-        public override string Type { get => "XOR"; }
+        public InputHigh()
+        {
+            Output = true;
+        }
 
         public override bool Result()
         {
-            // TODO: OrGate Logic
-            throw new NotImplementedException();
+            return Output;
         }
     }
 }

@@ -6,11 +6,24 @@ namespace CircuitSimulator.Domain.Models
     public abstract class Gate : INode
     {
         public string Name { get; set; }
+        public abstract string Type { get; }
         public bool Output { get => Result(); }
         public INode[] In { get; set; }
         public INode[] Out { get; set; }
 
-        public virtual void ConnectTo(INode node)
+        public void ConnectInput(INode node)
+        {
+            for (int i = 0; i < In.Length; i++)
+            {
+                if (In[i] == null)
+                {
+                    In[i] = node;
+                    return;
+                }
+            }
+        }
+
+        public void ConnectOutput(INode node)
         {
             for (int i = 0; i < Out.Length; i++)
             {

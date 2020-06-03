@@ -2,13 +2,18 @@
 
 namespace CircuitSimulator.Domain.Models
 {
-    public class StartPoint : INode
+    public abstract class StartPoint : INode
     {
         public string Name { get; set; }
-        public bool Output { get => Result(); }
+        public bool Output { get; set; }
         public INode[] Out { get; private set; }
 
-        public void ConnectTo(INode node)
+        public void ConnectInput(INode node)
+        {
+            return;
+        }
+
+        public void ConnectOutput(INode node)
         {
             for (int i = 0; i < Out.Length; i++)
             {
@@ -26,9 +31,6 @@ namespace CircuitSimulator.Domain.Models
             Out = new INode[outs];
         }
 
-        public bool Result()
-        {
-            return Output;
-        }
+        public abstract bool Result();
     }
 }

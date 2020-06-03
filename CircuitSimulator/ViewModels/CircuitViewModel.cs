@@ -70,9 +70,11 @@ namespace CircuitSimulator.ViewModels
                         bool result = validationStrategy.Validate(nodeDefinitions);
                         if (!result)
                         {
-                            break;
+                            return;
                         }
                     }
+
+                    Circuit = _circuitBuilder.Parse(nodeDefinitions);
                 }
                 else
                 {

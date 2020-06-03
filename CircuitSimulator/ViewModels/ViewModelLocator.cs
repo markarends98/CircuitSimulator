@@ -35,7 +35,8 @@ namespace CircuitSimulator.ViewModels
 
             // register node types
             NodeFactory nodeFactory = NodeFactory.Instance;
-            nodeFactory.RegisterNode<StartPoint, StartPoint>("START");
+            nodeFactory.RegisterNode<InputHigh, StartPoint>("INPUT_HIGH");
+            nodeFactory.RegisterNode<InputLow, StartPoint>("INPUT_LOW");
             nodeFactory.RegisterNode<Probe, Probe>("PROBE");
             nodeFactory.RegisterNode<NotGate, Gate>("NOT");
             nodeFactory.RegisterNode<AndGate, Gate>("AND");
@@ -48,7 +49,8 @@ namespace CircuitSimulator.ViewModels
             ValidationStrategyFactory validationStrategyFactory = ValidationStrategyFactory.Instance;
             validationStrategyFactory.RegisterStrategy(new ValidGatesValidation());
             validationStrategyFactory.RegisterStrategy(new DuplicateGateValidation());
-            validationStrategyFactory.RegisterStrategy(new LoopValidation());
+            //validationStrategyFactory.RegisterStrategy(new LoopValidation());
+
 
             SimpleIoc.Default.Register<CircuitViewModel>();
         }
