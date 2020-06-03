@@ -26,28 +26,35 @@ namespace CircuitSimulator.Factories
 
         private ValidationStrategyFactory() 
         {
-            Strategies = new List<IValidationStrategy>();
+            Strategies = new Dictionary<Type, List<IValidationStrategy>>();
         }
 
-        private readonly List<IValidationStrategy> Strategies;
+        private readonly Dictionary<Type, List<IValidationStrategy>> Strategies;
 
-        public void RegisterStrategy(IValidationStrategy strategy)
+        public void RegisterStrategy<T>(IValidationStrategy strategy)
         {
             if (strategy == null)
             {
                 throw new ArgumentException();
             }
 
-            if (Strategies.Any(t => t.GetType() == strategy.GetType()))
+            Type type = typeof(T);
+            if (Strategies.ContainsKey(type))
             {
-                throw new DuplicateStrategyException();
+                if (Strategies[type].Any(str => str.GetType() == strategy.GetType()))
+                {
+                    throw new DuplicateStrategyException();
+                }
+            }else
+            {
+                Strategies.Add(type, new List<IValidationStrategy>());
             }
-            Strategies.Add(strategy);
+            Strategies[type].Add(strategy);
         }
 
-        public List<IValidationStrategy> GetStrategies()
+        public Dictionary<Type, List<IValidationStrategy>> GetStrategies()
         {
-            return new List<IValidationStrategy>(Strategies);
+            return new Dictionary<Type, List<IValidationStrategy>>(Strategies);
         }
     }
 }

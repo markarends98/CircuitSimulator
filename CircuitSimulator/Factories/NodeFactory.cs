@@ -28,14 +28,12 @@ namespace CircuitSimulator.Factories
         private NodeFactory()
         {
             RegisteredNodes = new Dictionary<string, Type>();
-            NodeTypes = new Dictionary<string, string>();
         }
 
         private readonly Dictionary<string, Type> RegisteredNodes;
-        private readonly Dictionary<string, string> NodeTypes;
 
         public List<string> RegisteredTypes { get => new List<string>(RegisteredNodes.Keys); }
-        public void RegisterNode<Class, Type>(string type)
+        public void RegisterNode<Class>(string type)
         {
             bool typeCheck = typeof(INode).IsAssignableFrom(typeof(Class));
             if (type == null || type == string.Empty || !typeCheck)
@@ -48,7 +46,6 @@ namespace CircuitSimulator.Factories
                 throw new DuplicateNodeException();
             }
             RegisteredNodes.Add(type, typeof(Class));
-            NodeTypes.Add(type, typeof(Type).Name);
         }
 
         public INode CreateNode(NodeDefinition nodeDefinition)
@@ -63,11 +60,11 @@ namespace CircuitSimulator.Factories
             return null;
         }
 
-        public string GetNodeType(NodeDefinition nodeDefinition)
+        public Type GetRegisteredNodeType(NodeDefinition nodeDefinition)
         {
-            if(NodeTypes.ContainsKey(nodeDefinition.Type))
+            if(IsNodeRegistered(nodeDefinition.Type))
             {
-                return NodeTypes[nodeDefinition.Type];
+                return RegisteredNodes[nodeDefinition.Type];
             }
             return null;
         }
