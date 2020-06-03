@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace CircuitSimulator.Domain.Models
 {
@@ -8,8 +9,7 @@ namespace CircuitSimulator.Domain.Models
 
         public override bool Result()
         {
-            // TODO: AndGate Logic
-            throw new NotImplementedException();
+            return In.Any(node => node.Output != true) ? false : true;
         }
     }
 }

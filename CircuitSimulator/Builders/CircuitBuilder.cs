@@ -1,6 +1,7 @@
 ﻿using CircuitSimulator.Domain.Interfaces;
 using CircuitSimulator.Domain.Models;
 using CircuitSimulator.Factories;
+using CircuitSimulator.Logs;
 using System.Collections.ObjectModel;
 using System;
 using System.Collections.Generic;
@@ -12,15 +13,19 @@ namespace CircuitSimulator.Builders
 {
     public class CircuitBuilder
     {
+        public Logger Logger { get; }
         private NodeFactory nodeFactory;
 
         public CircuitBuilder()
         {
             nodeFactory = NodeFactory.Instance;
+            Logger = Logger.Instance;
         }
 
         public Circuit Parse(List<NodeDefinition> nodeDefinitions)
         {
+            Logger.Log("Parsing file...");
+
             ObservableCollection<INode> nodes = new ObservableCollection<INode>();
 
             nodeDefinitions.ForEach(nodeDefinition =>
@@ -45,6 +50,8 @@ namespace CircuitSimulator.Builders
                     });
                 }
             }
+
+            Logger.LogSuccess("Parsing file successful");
 
             return new Circuit(nodes);
         }
