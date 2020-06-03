@@ -22,7 +22,7 @@
         <!-- Start points listview -->
         <DockPanel Grid.Row="0" Grid.Column="0" LastChildFill="True">
             <Label DockPanel.Dock="Top">Startpoints</Label>
-            <ListView DockPanel.Dock="Top" Margin="5,0,5,0" ItemsSource="{ Binding circuit.StartPoints }">
+            <ListView DockPanel.Dock="Top" Margin="5,0,5,0" ItemsSource="{ Binding Circuit.StartPoints }">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>
@@ -46,7 +46,7 @@
         <!-- Probes listview -->
         <DockPanel Grid.Row="0" Grid.Column="1" LastChildFill="True">
             <Label DockPanel.Dock="Top">Gates</Label>
-            <ListView DockPanel.Dock="Top" Margin="5,0,5,0" ItemsSource="{ Binding circuit.Gates }">
+            <ListView DockPanel.Dock="Top" Margin="5,0,5,0" ItemsSource="{ Binding Circuit.Gates }">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>
@@ -86,7 +86,7 @@
         <!-- Gates listview -->
         <DockPanel Grid.Row="0" Grid.Column="2" LastChildFill="True">
             <Label DockPanel.Dock="Top">Probes</Label>
-            <ListView DockPanel.Dock="Top" Margin="5,0,5,0" ItemsSource="{ Binding circuit.Probes }">
+            <ListView DockPanel.Dock="Top" Margin="5,0,5,0" ItemsSource="{ Binding Circuit.Probes }">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>
@@ -105,7 +105,7 @@
         <DockPanel Grid.Row="1" Grid.Column="0" LastChildFill="True">
             <Label DockPanel.Dock="Top">Menu</Label>
             <StackPanel Orientation="Vertical" DockPanel.Dock="Top" Margin="10">
-                <Button Margin="0,0,0,10">Open circuit</Button>
+                <Button Margin="0,0,0,10" Command="{Binding OpenCircuitCommand}">Open circuit</Button>
                 <Button Margin="0,0,0,10">Quit</Button>
             </StackPanel>
         </DockPanel>
@@ -119,11 +119,15 @@
                     <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
 
-                <ListView Grid.Row="0" Margin="5,0,5,0">
-
+                <ListView Grid.Row="0" Margin="5,0,5,0" ItemsSource="{Binding Logger.Logs}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Message}" Foreground="{Binding TextColor}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
 
-                <Button Grid.Row="1" Width="100" HorizontalAlignment="Left" Margin="5,10,0,10">Clear log</Button>
+                <Button Grid.Row="1" Width="100" HorizontalAlignment="Left" Margin="5,10,0,10" Command="{Binding ClearLogsCommand}">Clear log</Button>
             </Grid>
         </DockPanel>
     </Grid>
