@@ -57,15 +57,14 @@ namespace CircuitSimulator.ViewModels
             openFileDialog.Filter = filter;
             if (openFileDialog.ShowDialog() == true)
             {
-                string ext = Path.GetExtension(openFileDialog.FileName);;
+                string ext = Path.GetExtension(openFileDialog.FileName);
                 IFileStrategy fileStrategy = _fileStrategyFactory.GetStrategy(ext.Substring(1));
                 if(fileStrategy != null)
                 {
-                    Logger.Log("Reading file: '" + openFileDialog.FileName + "'");
+                    Logger.Log(String.Format("Reading file: '{0}'", openFileDialog.FileName));
                     List<NodeDefinition> nodeDefinitions = fileStrategy.ReadFile(openFileDialog.OpenFile());
 
-                    Logger.Log("Validating file: '" + openFileDialog.FileName + "'");
-
+                    Logger.Log("Validating file");
                     if (_validator.Validate(nodeDefinitions)) {
                         Circuit = _circuitBuilder.Parse(nodeDefinitions);
                     }

@@ -30,7 +30,7 @@ namespace CircuitSimulator.Utils
             {
                 List<NodeDefinition> definitions = new List<NodeDefinition>(nodeDefinitions);
                 if(key != typeof(INode))
-                    definitions = definitions.Where(def => typeCheck(_nodeFactory.GetRegisteredNodeType(def), key)).ToList();
+                    definitions = definitions.Where(def => TypeCheck(_nodeFactory.GetRegisteredNodeType(def), key)).ToList();
 
                 List<IValidationStrategy> validationStrategies = strategies[key];
                 foreach(IValidationStrategy validationStrategy in validationStrategies)
@@ -43,7 +43,7 @@ namespace CircuitSimulator.Utils
             return true;
         }
 
-        private bool typeCheck(Type defType, Type validationType)
+        private bool TypeCheck(Type defType, Type validationType)
         {
             if(defType == validationType)
                 return true;

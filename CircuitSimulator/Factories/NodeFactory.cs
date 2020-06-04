@@ -50,8 +50,7 @@ namespace CircuitSimulator.Factories
 
         public INode CreateNode(NodeDefinition nodeDefinition)
         {
-
-            if (RegisteredNodes.ContainsKey(nodeDefinition.Type) && Activator.CreateInstance(RegisteredNodes[nodeDefinition.Type]) is INode node)
+            if (IsNodeRegistered(nodeDefinition.Type) && Activator.CreateInstance(RegisteredNodes[nodeDefinition.Type]) is INode node)
             {
                 node.Init(nodeDefinition.Name, nodeDefinition.Inputs.Count, nodeDefinition.Outputs.Count);
                 return node;
