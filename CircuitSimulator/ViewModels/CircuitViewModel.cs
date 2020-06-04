@@ -3,6 +3,7 @@ using CircuitSimulator.Domain.Models;
 using CircuitSimulator.Factories;
 using CircuitSimulator.Interfaces;
 using CircuitSimulator.Logs;
+using CircuitSimulator.Utils;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Microsoft.Win32;
@@ -29,9 +30,9 @@ namespace CircuitSimulator.ViewModels
         }
 
         private FileStrategyFactory _fileStrategyFactory;
-        public ValidationStrategyFactory _validationStrategyFactory;
         private CircuitBuilder _circuitBuilder;
         private Circuit _circuit;
+        private Validator _validator;
         public Logger Logger { get; set; }
 
         #region Commands
@@ -43,12 +44,12 @@ namespace CircuitSimulator.ViewModels
         public CircuitViewModel()
         {
             _fileStrategyFactory = FileStrategyFactory.Instance;
-            _validationStrategyFactory = ValidationStrategyFactory.Instance;
             _circuitBuilder = new CircuitBuilder();
             OpenCircuitCommand = new RelayCommand(OpenCircuit);
             QuitCommand = new RelayCommand(Quit);
             ClearLogsCommand = new RelayCommand(ClearLogs);
             Logger = Logger.Instance;
+            _validator = new Validator();
         }
 
         private void OpenCircuit()
@@ -58,25 +59,17 @@ namespace CircuitSimulator.ViewModels
             openFileDialog.Filter = filter;
             if (openFileDialog.ShowDialog() == true)
             {
-                string ext = Path.GetExtension(openFileDialog.FileName);;
+                string ext = Path.GetExtension(openFileDialog.FileName);
                 IFileStrategy fileStrategy = _fileStrategyFactory.GetStrategy(ext.Substring(1));
                 if(fileStrategy != null)
                 {
-                    Logger.Log("Reading file: '" + openFileDialog.FileName + "'");
+                    Logger.Log(String.Format("Reading file: '{0}'", openFileDialog.FileName));
                     List<NodeDefinition> nodeDefinitions = fileStrategy.ReadFile(openFileDialog.OpenFile());
 
-                    Logger.Log("Validating file: '" + openFileDialog.FileName + "'");
-                    List<IValidationStrategy> validationStrategies = _validationStrategyFactory.GetStrategies();
-                    foreach(IValidationStrategy validationStrategy in validationStrategies)
-                    {
-                        bool result = validationStrategy.Validate(nodeDefinitions);
-                        if (!result)
-                        {
-                            return;
-                        }
+                    Logger.Log("Validating file");
+                    if (_validator.Validate(nodeDefinitions)) {
+                        Circuit = _circuitBuilder.Parse(nodeDefinitions);
                     }
-
-                    Circuit = _circuitBuilder.Parse(nodeDefinitions);
                 }
                 else
                 {

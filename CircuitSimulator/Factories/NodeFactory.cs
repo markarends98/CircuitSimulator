@@ -1,5 +1,6 @@
 ﻿using CircuitSimulator.Domain.Interfaces;
 using CircuitSimulator.Domain.Models;
+using CircuitSimulator.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,28 +28,29 @@ namespace CircuitSimulator.Factories
         private NodeFactory()
         {
             RegisteredNodes = new Dictionary<string, Type>();
-            NodeTypes = new Dictionary<string, string>();
         }
 
         private readonly Dictionary<string, Type> RegisteredNodes;
-        private readonly Dictionary<string, string> NodeTypes;
 
         public List<string> RegisteredTypes { get => new List<string>(RegisteredNodes.Keys); }
-        public void RegisterNode<Class, Type>(string type)
+        public void RegisterNode<Class>(string type)
         {
             bool typeCheck = typeof(INode).IsAssignableFrom(typeof(Class));
             if (type == null || type == string.Empty || !typeCheck)
             {
                 throw new ArgumentException();
             }
+
+            if(IsNodeRegistered(type))
+            {
+                throw new DuplicateNodeException();
+            }
             RegisteredNodes.Add(type, typeof(Class));
-            NodeTypes.Add(type, typeof(Type).Name);
         }
 
         public INode CreateNode(NodeDefinition nodeDefinition)
         {
-
-            if (RegisteredNodes.ContainsKey(nodeDefinition.Type) && Activator.CreateInstance(RegisteredNodes[nodeDefinition.Type]) is INode node)
+            if (IsNodeRegistered(nodeDefinition.Type) && Activator.CreateInstance(RegisteredNodes[nodeDefinition.Type]) is INode node)
             {
                 node.Init(nodeDefinition.Name, nodeDefinition.Inputs.Count, nodeDefinition.Outputs.Count);
                 return node;
@@ -57,13 +59,18 @@ namespace CircuitSimulator.Factories
             return null;
         }
 
-        public string GetNodeType(NodeDefinition nodeDefinition)
+        public Type GetRegisteredNodeType(NodeDefinition nodeDefinition)
         {
-            if(NodeTypes.ContainsKey(nodeDefinition.Type))
+            if(IsNodeRegistered(nodeDefinition.Type))
             {
-                return NodeTypes[nodeDefinition.Type];
+                return RegisteredNodes[nodeDefinition.Type];
             }
             return null;
+        }
+
+        public bool IsNodeRegistered(string type)
+        {
+            return RegisteredNodes.ContainsKey(type);
         }
     }
 }

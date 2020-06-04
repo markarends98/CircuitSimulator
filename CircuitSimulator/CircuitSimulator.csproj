@@ -79,6 +79,13 @@
     <Compile Include="Interfaces\IValidationStrategy.cs" />
     <Compile Include="Logs\Log.cs" />
     <Compile Include="Logs\Logger.cs" />
+    <Compile Include="Utils\Validator.cs" />
+    <Compile Include="ValidationStrategies\ExactOutputsValidation.cs" />
+    <Compile Include="ValidationStrategies\ExactInputsValidation.cs" />
+    <Compile Include="ValidationStrategies\MaxInputsValidation.cs" />
+    <Compile Include="ValidationStrategies\MinInputsValidation.cs" />
+    <Compile Include="ValidationStrategies\MaxOutputsValidation.cs" />
+    <Compile Include="ValidationStrategies\MinOutputsValidation.cs" />
     <Compile Include="ValidationStrategies\ValidGatesValidation.cs" />
     <Compile Include="ValidationStrategies\DuplicateGatesValidation.cs" />
     <Compile Include="ValidationStrategies\LoopValidation.cs" />
@@ -130,9 +137,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Utils\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CircuitSimulator.Model\CircuitSimulator.Domain.csproj">
       <Project>{c38bb0d4-c43d-4aed-ad89-3940d457065c}</Project>

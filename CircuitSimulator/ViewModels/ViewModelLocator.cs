@@ -12,6 +12,7 @@
   See http://www.galasoft.ch/mvvm
 */
 
+using CircuitSimulator.Domain.Interfaces;
 using CircuitSimulator.Domain.Models;
 using CircuitSimulator.Factories;
 using CircuitSimulator.FileStrategies;
@@ -35,21 +36,26 @@ namespace CircuitSimulator.ViewModels
 
             // register node types
             NodeFactory nodeFactory = NodeFactory.Instance;
-            nodeFactory.RegisterNode<InputHigh, StartPoint>("INPUT_HIGH");
-            nodeFactory.RegisterNode<InputLow, StartPoint>("INPUT_LOW");
-            nodeFactory.RegisterNode<Probe, Probe>("PROBE");
-            nodeFactory.RegisterNode<NotGate, Gate>("NOT");
-            nodeFactory.RegisterNode<AndGate, Gate>("AND");
-            nodeFactory.RegisterNode<NandGate, Gate>("NAND");
-            nodeFactory.RegisterNode<NorGate, Gate>("NOR");
-            nodeFactory.RegisterNode<OrGate, Gate>("OR");
-            nodeFactory.RegisterNode<XorGate, Gate>("XOR");
+            nodeFactory.RegisterNode<InputHigh>("INPUT_HIGH");
+            nodeFactory.RegisterNode<InputLow>("INPUT_LOW");
+            nodeFactory.RegisterNode<Probe>("PROBE");
+            nodeFactory.RegisterNode<NotGate>("NOT");
+            nodeFactory.RegisterNode<AndGate>("AND");
+            nodeFactory.RegisterNode<NandGate>("NAND");
+            nodeFactory.RegisterNode<NorGate>("NOR");
+            nodeFactory.RegisterNode<OrGate>("OR");
+            nodeFactory.RegisterNode<XorGate>("XOR");
 
             // register validation strategies
+            // use INode for validating all node types
             ValidationStrategyFactory validationStrategyFactory = ValidationStrategyFactory.Instance;
-            validationStrategyFactory.RegisterStrategy(new ValidGatesValidation());
-            validationStrategyFactory.RegisterStrategy(new DuplicateGateValidation());
-            //validationStrategyFactory.RegisterStrategy(new LoopValidation());
+            validationStrategyFactory.RegisterStrategy<INode>(new ValidGatesValidation());
+            validationStrategyFactory.RegisterStrategy<INode>(new DuplicateGateValidation());
+            validationStrategyFactory.RegisterStrategy<INode>(new LoopValidation());
+            //validationStrategyFactory.RegisterStrategy<Gate>(new MinInputsValidation(1));
+            //validationStrategyFactory.RegisterStrategy<Gate>(new MinOutputsValidation(1));
+            //validationStrategyFactory.RegisterStrategy<AndGate>(new MinInputsValidation(2));
+            //validationStrategyFactory.RegisterStrategy<AndGate>(new MinOutputsValidation(1));
 
 
             SimpleIoc.Default.Register<CircuitViewModel>();
