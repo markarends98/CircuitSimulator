@@ -79,6 +79,7 @@
     <Compile Include="Interfaces\IValidationStrategy.cs" />
     <Compile Include="Logs\Log.cs" />
     <Compile Include="Logs\Logger.cs" />
+    <Compile Include="Utils\Util.cs" />
     <Compile Include="Utils\Validator.cs" />
     <Compile Include="ValidationStrategies\ExactOutputsValidation.cs" />
     <Compile Include="ValidationStrategies\ExactInputsValidation.cs" />
