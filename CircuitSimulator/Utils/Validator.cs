@@ -26,11 +26,14 @@ namespace CircuitSimulator.Utils
             Dictionary<Type, List<IValidationStrategy>> strategies = _validationStrategyFactory.GetStrategies();
             List<Type> keys = new List<Type>(strategies.Keys);
 
+            // Execute validation methods for each registered type
             foreach(Type key in keys)
             {
                 List<NodeDefinition> definitions = new List<NodeDefinition>(nodeDefinitions);
+
+                // Filter nodes by type
                 if(key != typeof(INode))
-                    definitions = definitions.Where(def => TypeCheck(_nodeFactory.GetRegisteredNodeType(def), key)).ToList();
+                    definitions = definitions.Where(def => Util.TypeCheck(_nodeFactory.GetRegisteredNodeType(def), key)).ToList();
 
                 List<IValidationStrategy> validationStrategies = strategies[key];
                 foreach(IValidationStrategy validationStrategy in validationStrategies)
@@ -41,17 +44,6 @@ namespace CircuitSimulator.Utils
                 }
             }
             return true;
-        }
-
-        private bool TypeCheck(Type defType, Type validationType)
-        {
-            if(defType == validationType)
-                return true;
-
-            if (validationType.IsAssignableFrom(defType))
-                return true;
-
-            return false;
         }
     }
 }

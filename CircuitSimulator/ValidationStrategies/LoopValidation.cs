@@ -2,6 +2,7 @@
 using CircuitSimulator.Factories;
 using CircuitSimulator.Interfaces;
 using CircuitSimulator.Logs;
+using CircuitSimulator.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,8 @@ namespace CircuitSimulator.ValidationStrategies
 
         public bool Validate(List<NodeDefinition> allNodes)
         {
-            List<NodeDefinition> startPoints = allNodes.Where(def => TypeCheck(_nodeFactory.GetRegisteredNodeType(def), typeof(StartPoint))).ToList();
+            List<NodeDefinition> startPoints = allNodes.Where(def => Util.TypeCheck(_nodeFactory.GetRegisteredNodeType(def), typeof(StartPoint))).ToList();
+
             List<List<string>> Paths = new List<List<string>>();
             foreach(NodeDefinition startPoint in startPoints)
             {
@@ -70,17 +72,6 @@ namespace CircuitSimulator.ValidationStrategies
                 }
             }
             return true;
-        }
-
-        private bool TypeCheck(Type defType, Type validationType)
-        {
-            if (defType == validationType)
-                return true;
-
-            if (validationType.IsAssignableFrom(defType))
-                return true;
-
-            return false;
         }
     }
 }
