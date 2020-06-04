@@ -12,7 +12,7 @@ namespace CircuitSimulator.Domain.Models
 
         public override bool Result()
         {
-            return In.Any(node => node.Output == true) ? true : false;
+            return In.Any(node => node.Output == true);
         }
     }
 }

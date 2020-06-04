@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace CircuitSimulator.Domain.Models
 {
@@ -11,8 +12,7 @@ namespace CircuitSimulator.Domain.Models
 
         public override bool Result()
         {
-            // TODO: NorGate Logic
-            throw new NotImplementedException();
+            return In.Any(node => node.Output == true) ? false : true;
         }
     }
 }

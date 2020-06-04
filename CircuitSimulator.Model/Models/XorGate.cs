@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace CircuitSimulator.Domain.Models
 {
@@ -11,8 +12,7 @@ namespace CircuitSimulator.Domain.Models
 
         public override bool Result()
         {
-            // TODO: OrGate Logic
-            throw new NotImplementedException();
+            return (In.Count(node => node.Output == true) % 2) != 0;
         }
     }
 }
