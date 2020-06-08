@@ -46,9 +46,13 @@ namespace CircuitSimulator.ViewModels
             nodeFactory.RegisterNode<OrGate>("OR");
             nodeFactory.RegisterNode<XorGate>("XOR");
 
-            // Register validation strategies
-            // INode validation that spans all node types
+            // Validation strategies
             ValidationStrategyFactory validationStrategyFactory = ValidationStrategyFactory.Instance;
+
+            // Circuit validation
+            validationStrategyFactory.RegisterStrategy<INode>(new MinNodeValidation());
+
+            // INode validation
             validationStrategyFactory.RegisterStrategy<INode>(new ValidGatesValidation());
             validationStrategyFactory.RegisterStrategy<INode>(new DuplicateGateValidation());
             validationStrategyFactory.RegisterStrategy<INode>(new LoopValidation());

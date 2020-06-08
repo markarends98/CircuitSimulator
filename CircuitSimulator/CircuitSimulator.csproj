@@ -86,6 +86,7 @@
     <Compile Include="ValidationStrategies\MaxInputsValidation.cs" />
     <Compile Include="ValidationStrategies\MinInputsValidation.cs" />
     <Compile Include="ValidationStrategies\MaxOutputsValidation.cs" />
+    <Compile Include="ValidationStrategies\MinNodeValidation.cs" />
     <Compile Include="ValidationStrategies\MinOutputsValidation.cs" />
     <Compile Include="ValidationStrategies\ValidGatesValidation.cs" />
     <Compile Include="ValidationStrategies\DuplicateGatesValidation.cs" />
