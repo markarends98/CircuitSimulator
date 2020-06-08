@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CircuitSimulator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1400"
+        Title="MainWindow" Height="750" Width="1400"
         DataContext="{Binding Circuit, Source={StaticResource Locator}}">
     <Grid>
         <Grid.RowDefinitions>
@@ -25,19 +25,22 @@
             <ListView DockPanel.Dock="Top" Margin="5,0,5,0" ItemsSource="{ Binding Circuit.StartPoints }">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock>
-                            <Run Text="{Binding Name}" />
-                            <Run xml:space="preserve" Text="&#x09;| " />
-                            <Run Text=" OutputNodes=[" />
-                            <ItemsControl ItemsSource="{ Binding Out }">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                            <Run Text="]" />
-                        </TextBlock>
+                        <StackPanel>
+                            <CheckBox IsChecked="{Binding Output}"/>
+                            <TextBlock>
+                                <Run Text="{Binding Name}" />
+                                <Run xml:space="preserve" Text="&#x09;| " />
+                                <Run Text=" OutputNodes=[" />
+                                <ItemsControl ItemsSource="{ Binding Out }">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <Run Text="]" />
+                            </TextBlock>
+                        </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
@@ -49,7 +52,20 @@
             <ListView DockPanel.Dock="Top" Margin="5,0,5,0" ItemsSource="{ Binding Circuit.Gates }">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle x:Name="rect" Height="10" Width="10">
+                                <Rectangle.Style>
+                                    <Style TargetType="Rectangle">
+                                        <Setter Property="Fill" Value="Red"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Output}" Value="true">
+                                                <Setter Property="Fill" Value="Green" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Rectangle.Style>
+                            </Rectangle>
+                            <TextBlock>
                             <Run Text="{Binding Name}" />
                             <Run xml:space="preserve" Text="&#x09;| " />
                             <Run Text=" [" />
@@ -78,6 +94,7 @@
                             </ItemsControl>
                             <Run Text="]" />
                         </TextBlock>
+                        </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
@@ -89,13 +106,27 @@
             <ListView DockPanel.Dock="Top" Margin="5,0,5,0" ItemsSource="{ Binding Circuit.Probes }">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle x:Name="rect" Height="10" Width="10">
+                                <Rectangle.Style>
+                                    <Style TargetType="Rectangle">
+                                        <Setter Property="Fill" Value="Red"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Output}" Value="true">
+                                                <Setter Property="Fill" Value="Green" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Rectangle.Style>
+                            </Rectangle>
+                            <TextBlock>
                             <Run Text="{Binding Name}" />
                             <Run xml:space="preserve" Text="&#x09;| " />
                             <Run Text=" InputNodes=[" />
                             <Run Text="{Binding Input.Name}" />
                             <Run Text="]" />
-                        </TextBlock>
+                            </TextBlock>
+                        </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
