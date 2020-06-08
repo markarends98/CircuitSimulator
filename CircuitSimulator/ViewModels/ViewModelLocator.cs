@@ -46,17 +46,43 @@ namespace CircuitSimulator.ViewModels
             nodeFactory.RegisterNode<OrGate>("OR");
             nodeFactory.RegisterNode<XorGate>("XOR");
 
-            // register validation strategies
-            // use INode for validating all node types
+            // Register validation strategies
+            // INode validation that spans all node types
             ValidationStrategyFactory validationStrategyFactory = ValidationStrategyFactory.Instance;
             validationStrategyFactory.RegisterStrategy<INode>(new ValidGatesValidation());
             validationStrategyFactory.RegisterStrategy<INode>(new DuplicateGateValidation());
             validationStrategyFactory.RegisterStrategy<INode>(new LoopValidation());
-            //validationStrategyFactory.RegisterStrategy<Gate>(new MinInputsValidation(1));
-            //validationStrategyFactory.RegisterStrategy<Gate>(new MinOutputsValidation(1));
-            //validationStrategyFactory.RegisterStrategy<AndGate>(new MinInputsValidation(2));
-            //validationStrategyFactory.RegisterStrategy<AndGate>(new MinOutputsValidation(1));
 
+            // StartPoint validation
+            validationStrategyFactory.RegisterStrategy<StartPoint>(new MinOutputsValidation(1));
+
+            // Probe validation
+            validationStrategyFactory.RegisterStrategy<Probe>(new MinInputsValidation(1));
+
+            // AND gate validation
+            validationStrategyFactory.RegisterStrategy<AndGate>(new MinInputsValidation(2));
+            validationStrategyFactory.RegisterStrategy<AndGate>(new MinOutputsValidation(1));
+
+            // NAND gate validation
+            validationStrategyFactory.RegisterStrategy<NandGate>(new MinInputsValidation(2));
+            validationStrategyFactory.RegisterStrategy<NandGate>(new MinOutputsValidation(1));
+
+            // NOR gate validation
+            validationStrategyFactory.RegisterStrategy<NorGate>(new MinInputsValidation(2));
+            validationStrategyFactory.RegisterStrategy<NorGate>(new MinOutputsValidation(1));
+
+            // NOT gate validation
+            validationStrategyFactory.RegisterStrategy<NotGate>(new MinInputsValidation(1));
+            validationStrategyFactory.RegisterStrategy<NotGate>(new MaxInputsValidation(1));
+            validationStrategyFactory.RegisterStrategy<NotGate>(new MinOutputsValidation(1));
+
+            // OR gate validation
+            validationStrategyFactory.RegisterStrategy<OrGate>(new MinInputsValidation(2));
+            validationStrategyFactory.RegisterStrategy<OrGate>(new MinOutputsValidation(1));
+
+            // XOR gate validation
+            validationStrategyFactory.RegisterStrategy<XorGate>(new MinInputsValidation(2));
+            validationStrategyFactory.RegisterStrategy<XorGate>(new MinOutputsValidation(1));
 
             SimpleIoc.Default.Register<CircuitViewModel>();
         }
