@@ -26,7 +26,10 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <CheckBox IsChecked="{Binding Output}"/>
+                            <CheckBox IsChecked="{Binding Output}"
+                                      Command="{Binding Path=DataContext.RefreshCircuitCommand, 
+                          RelativeSource={RelativeSource Mode=FindAncestor, 
+                                          AncestorType={x:Type ListView}}}"/>
                             <TextBlock>
                                 <Run Text="{Binding Name}" />
                                 <Run xml:space="preserve" Text="&#x09;| " />
