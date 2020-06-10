@@ -32,7 +32,6 @@ namespace CircuitSimulator.Factories
 
         private readonly Dictionary<string, Type> RegisteredNodes;
 
-        public List<string> RegisteredTypes { get => new List<string>(RegisteredNodes.Keys); }
         public void RegisterNode<Class>(string type)
         {
             bool typeCheck = typeof(INode).IsAssignableFrom(typeof(Class));

@@ -13,24 +13,24 @@ namespace CircuitSimulator.Builders
 {
     public class CircuitBuilder
     {
-        public Logger Logger { get; }
-        private NodeFactory nodeFactory;
+        private Logger _logger;
+        private NodeFactory _nodeFactory;
 
         public CircuitBuilder()
         {
-            nodeFactory = NodeFactory.Instance;
-            Logger = Logger.Instance;
+            _nodeFactory = NodeFactory.Instance;
+            _logger = Logger.Instance;
         }
 
         public Circuit Build(List<NodeDefinition> nodeDefinitions)
         {
-            Logger.Log("Building circuit...");
+            _logger.Log("Building circuit...");
 
             ObservableCollection<INode> nodes = new ObservableCollection<INode>();
 
             nodeDefinitions.ForEach(nodeDefinition =>
             {
-                nodes.Add(nodeFactory.CreateNode(nodeDefinition));
+                nodes.Add(_nodeFactory.CreateNode(nodeDefinition));
             });
 
             foreach(INode node in nodes)
@@ -51,7 +51,7 @@ namespace CircuitSimulator.Builders
                 }
             }
 
-            Logger.LogSuccess("Circuit building successful");
+            _logger.LogSuccess("Circuit building successful");
 
             return new Circuit(nodes);
         }
