@@ -32,9 +32,9 @@ namespace CircuitSimulator.Factories
 
         private readonly Dictionary<string, Type> RegisteredNodes;
 
-        public void RegisterNode<Class>(string type)
+        public void RegisterNode<T>(string type)
         {
-            bool typeCheck = typeof(INode).IsAssignableFrom(typeof(Class));
+            bool typeCheck = typeof(INode).IsAssignableFrom(typeof(T));
             if (type == null || type == string.Empty || !typeCheck)
             {
                 throw new ArgumentException();
@@ -44,7 +44,7 @@ namespace CircuitSimulator.Factories
             {
                 throw new DuplicateNodeException();
             }
-            RegisteredNodes.Add(type, typeof(Class));
+            RegisteredNodes.Add(type, typeof(T));
         }
 
         public INode CreateNode(NodeDefinition nodeDefinition)
