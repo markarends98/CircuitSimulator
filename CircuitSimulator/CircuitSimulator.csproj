@@ -81,8 +81,6 @@
     <Compile Include="Logs\Logger.cs" />
     <Compile Include="Utils\Util.cs" />
     <Compile Include="Utils\Validator.cs" />
-    <Compile Include="ValidationStrategies\ExactOutputsValidation.cs" />
-    <Compile Include="ValidationStrategies\ExactInputsValidation.cs" />
     <Compile Include="ValidationStrategies\MaxInputsValidation.cs" />
     <Compile Include="ValidationStrategies\MinInputsValidation.cs" />
     <Compile Include="ValidationStrategies\MaxOutputsValidation.cs" />

@@ -21,7 +21,7 @@ namespace CircuitSimulator.ValidationStrategies
             Logger = Logger.Instance;
             _nodeFactory = NodeFactory.Instance;
         }
-
+         
         public bool Validate(List<NodeDefinition> nodeDefinitions)
         {
             bool hasOneStartPoint = nodeDefinitions.Any(node => Util.TypeCheck(_nodeFactory.GetRegisteredNodeType(node), typeof(StartPoint)));

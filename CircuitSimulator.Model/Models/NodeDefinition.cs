@@ -11,14 +11,12 @@ namespace CircuitSimulator.Domain.Models
         public List<string> Inputs { get; set; }
         public List<string> Outputs { get; set; }
 
-        public bool Visited { get; set; }
         public NodeDefinition()
         {
             Name = null;
             Type = null;
             Inputs = new List<string>();
             Outputs = new List<string>();
-            Visited = false;
         }
     }
 }
