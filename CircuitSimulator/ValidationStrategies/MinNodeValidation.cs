@@ -28,7 +28,7 @@ namespace CircuitSimulator.ValidationStrategies
             bool hasOneNode = nodeDefinitions.Any(node => Util.TypeCheck(_nodeFactory.GetRegisteredNodeType(node), typeof(Gate)));
             bool hasOneProbe = nodeDefinitions.Any(node => Util.TypeCheck(_nodeFactory.GetRegisteredNodeType(node), typeof(Probe)));
 
-            if (!hasOneStartPoint && !hasOneNode && !hasOneProbe)
+            if (!hasOneStartPoint || !hasOneNode || !hasOneProbe)
             {
                 Logger.LogError("Circuit requires at least 1 startpoint, gate and probe");
                 return false;
