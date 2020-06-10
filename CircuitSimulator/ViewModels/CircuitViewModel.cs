@@ -71,7 +71,7 @@ namespace CircuitSimulator.ViewModels
 
                     Logger.Log("Validating file");
                     if (_validator.Validate(nodeDefinitions)) {
-                        Circuit = _circuitBuilder.Parse(nodeDefinitions);
+                        Circuit = _circuitBuilder.Build(nodeDefinitions);
                     }
                 }
                 else

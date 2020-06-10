@@ -22,9 +22,9 @@ namespace CircuitSimulator.Builders
             Logger = Logger.Instance;
         }
 
-        public Circuit Parse(List<NodeDefinition> nodeDefinitions)
+        public Circuit Build(List<NodeDefinition> nodeDefinitions)
         {
-            Logger.Log("Parsing file...");
+            Logger.Log("Building circuit...");
 
             ObservableCollection<INode> nodes = new ObservableCollection<INode>();
 
@@ -51,7 +51,7 @@ namespace CircuitSimulator.Builders
                 }
             }
 
-            Logger.LogSuccess("Parsing file successful");
+            Logger.LogSuccess("Circuit building successful");
 
             return new Circuit(nodes);
         }
