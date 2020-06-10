@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace CircuitSimulator.ValidationStrategies
 {
-    public class ExactOututsValidation : IValidationStrategy
+    public class ExactOuputsValidation : IValidationStrategy
     {
         public Logger Logger { get; }
         private int _inputs;
 
-        public ExactOututsValidation(int inputs)
+        public ExactOuputsValidation(int inputs)
         {
             Logger = Logger.Instance;
             _inputs = inputs;

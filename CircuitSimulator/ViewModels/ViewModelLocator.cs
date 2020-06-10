@@ -78,7 +78,6 @@ namespace CircuitSimulator.ViewModels
             // NOT gate validation
             validationStrategyFactory.RegisterStrategy<NotGate>(new MinInputsValidation(1));
             validationStrategyFactory.RegisterStrategy<NotGate>(new MaxInputsValidation(1));
-            validationStrategyFactory.RegisterStrategy<NotGate>(new MinOutputsValidation(1));
 
             // OR gate validation
             validationStrategyFactory.RegisterStrategy<OrGate>(new MinInputsValidation(2));
