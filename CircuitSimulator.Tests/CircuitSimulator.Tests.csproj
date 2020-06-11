@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModuleTests\CircuitBuilderTest.cs" />
     <Compile Include="NodeTests\AndGateTest.cs" />
     <Compile Include="NodeTests\NandGateTest.cs" />
     <Compile Include="NodeTests\NorGateTest.cs" />
@@ -61,13 +62,15 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ModuleTests\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CircuitSimulator.Model\CircuitSimulator.Domain.csproj">
       <Project>{C38BB0D4-C43D-4AED-AD89-3940D457065C}</Project>
       <Name>CircuitSimulator.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CircuitSimulator\CircuitSimulator.csproj">
+      <Project>{FC04D5AB-1463-4034-979D-28B05AC51AF7}</Project>
+      <Name>CircuitSimulator</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
