@@ -2,6 +2,7 @@
 using CircuitSimulator.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace CircuitSimulator.FileStrategies
 {
+    [ExcludeFromCodeCoverage]
     public class TxtFileStrategy : IFileStrategy
     {
         public List<NodeDefinition> ReadFile(Stream fileStream)

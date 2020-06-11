@@ -24,7 +24,7 @@ namespace CircuitSimulator.ValidationStrategies
         {
             foreach(NodeDefinition nodeDefinition in nodeDefinitions)
             {
-                if(nodeDefinition.Outputs == null || nodeDefinition.Outputs.Count < _maxOutputs)
+                if(nodeDefinition.Outputs == null || nodeDefinition.Outputs.Count > _maxOutputs)
                 {
                     Logger.LogError(String.Format("node '{0}' of type '{1}'  should have a maximum of {2} outputs", nodeDefinition.Name, nodeDefinition.Type, _maxOutputs));
                     return false;

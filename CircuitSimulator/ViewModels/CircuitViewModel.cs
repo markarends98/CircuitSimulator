@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ using System.Windows.Data;
 
 namespace CircuitSimulator.ViewModels
 {
+    [ExcludeFromCodeCoverage]
     public class CircuitViewModel : ViewModelBase
     {
         public Circuit Circuit

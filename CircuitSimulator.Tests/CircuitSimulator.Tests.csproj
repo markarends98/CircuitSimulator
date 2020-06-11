@@ -50,6 +50,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModuleTests\CircuitBuilderTest.cs" />
+    <Compile Include="ModuleTests\ValidationStrategy\DuplicateGateValidationTest.cs" />
+    <Compile Include="ModuleTests\ValidationStrategy\LoopValidationTest.cs" />
+    <Compile Include="ModuleTests\ValidationStrategy\MaxInputsValidationTest.cs" />
+    <Compile Include="ModuleTests\ValidationStrategy\MaxOutputsValidationTest.cs" />
+    <Compile Include="ModuleTests\ValidationStrategy\MinInputsValidationTest.cs" />
+    <Compile Include="ModuleTests\ValidationStrategy\MinNodeValidationTest.cs" />
+    <Compile Include="ModuleTests\ValidationStrategy\MinOutputsValidationTest.cs" />
+    <Compile Include="ModuleTests\ValidationStrategy\ValidGatesValidationTest.cs" />
     <Compile Include="NodeTests\AndGateTest.cs" />
     <Compile Include="NodeTests\NandGateTest.cs" />
     <Compile Include="NodeTests\NorGateTest.cs" />
@@ -62,7 +70,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CircuitSimulator.Model\CircuitSimulator.Domain.csproj">
       <Project>{C38BB0D4-C43D-4AED-AD89-3940D457065C}</Project>

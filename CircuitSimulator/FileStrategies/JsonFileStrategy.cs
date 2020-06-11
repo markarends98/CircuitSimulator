@@ -4,11 +4,13 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 
 namespace CircuitSimulator.FileStrategies
 {
+    [ExcludeFromCodeCoverage]
     public class JsonFileStrategy : IFileStrategy
     {
         public List<NodeDefinition> ReadFile(Stream fileStream)

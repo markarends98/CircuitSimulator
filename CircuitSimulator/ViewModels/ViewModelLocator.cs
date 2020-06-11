@@ -20,9 +20,11 @@ using CircuitSimulator.ValidationStrategies;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CircuitSimulator.ViewModels
 {
+    [ExcludeFromCodeCoverage]
     public class ViewModelLocator
     {
         public ViewModelLocator()
