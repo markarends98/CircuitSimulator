@@ -1,6 +1,8 @@
-﻿namespace CircuitSimulator.Domain.Interfaces
+﻿using System.ComponentModel;
+
+namespace CircuitSimulator.Domain.Interfaces
 {
-    public interface INode
+    public interface INode : INotifyPropertyChanged
     {
         string Name { get; set; } 
         bool Output { get; }

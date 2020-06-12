@@ -1,5 +1,6 @@
 ﻿using CircuitSimulator.Domain.Interfaces;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace CircuitSimulator.Domain.Models
 {
@@ -10,6 +11,8 @@ namespace CircuitSimulator.Domain.Models
         public bool Output { get => Result(); }
         public INode[] In { get; set; }
         public INode[] Out { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void ConnectInput(INode node)
         {
@@ -42,6 +45,11 @@ namespace CircuitSimulator.Domain.Models
             Name = name;
             In = new INode[ins];
             Out = new INode[outs];
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -1,12 +1,22 @@
-﻿ using CircuitSimulator.Domain.Interfaces;
+﻿using System.ComponentModel;
+using CircuitSimulator.Domain.Interfaces;
 
 namespace CircuitSimulator.Domain.Models
 {
     public abstract class StartPoint : INode
     {
         public string Name { get; set; }
-        public bool Output { get; set; }
+        private bool _output;
+        public bool Output {
+            get { return _output; }
+            set {
+                _output = value;
+                OnPropertyChanged("Output");
+            }
+        }
         public INode[] Out { get; private set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void ConnectInput(INode node)
         {
@@ -32,5 +42,10 @@ namespace CircuitSimulator.Domain.Models
         }
 
         public abstract bool Result();
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

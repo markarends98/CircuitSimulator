@@ -40,7 +40,6 @@ namespace CircuitSimulator.ViewModels
 
         #region Commands
         public RelayCommand OpenCircuitCommand { get; set; }
-        public RelayCommand RefreshCircuitCommand { get; set; }
         public RelayCommand QuitCommand { get; set; }
         public RelayCommand ClearLogsCommand { get; set; }
         #endregion
@@ -50,7 +49,6 @@ namespace CircuitSimulator.ViewModels
             _fileStrategyFactory = FileStrategyFactory.Instance;
             _circuitBuilder = new CircuitBuilder();
             OpenCircuitCommand = new RelayCommand(OpenCircuit);
-            RefreshCircuitCommand = new RelayCommand(RefreshCircuit);
             QuitCommand = new RelayCommand(Quit);
             ClearLogsCommand = new RelayCommand(ClearLogs);
             Logger = Logger.Instance;
@@ -81,12 +79,6 @@ namespace CircuitSimulator.ViewModels
                     Logger.LogError("Cannot parse files with extension: '" + ext + "'");
                 }
             }
-        }
-
-        private void RefreshCircuit()
-        {
-            CollectionViewSource.GetDefaultView(Circuit.Gates).Refresh();
-            CollectionViewSource.GetDefaultView(Circuit.Probes).Refresh();
         }
 
         private void Quit()
