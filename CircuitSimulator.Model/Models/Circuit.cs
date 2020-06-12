@@ -10,10 +10,20 @@ namespace CircuitSimulator.Domain.Models
 {
     public class Circuit : INotifyPropertyChanged
     {
+        private List<INode> _originalElements;
         private ObservableCollection<INode> _elements;
         private ObservableCollection<StartPoint> _startPoints;
-        public ObservableCollection<Gate> _gates;
-        public ObservableCollection<Probe> _probes;
+        private ObservableCollection<Gate> _gates;
+        private ObservableCollection<Probe> _probes;
+        public List<INode> OriginalElements
+        {
+            get { return _originalElements; }
+            set
+            {
+                _originalElements = value;
+                OnPropertyChanged("OriginalElements");
+            }
+        }
         public ObservableCollection<INode> Elements {
             get { return _elements; }
             set {
@@ -54,7 +64,19 @@ namespace CircuitSimulator.Domain.Models
         public Circuit(Collection<INode> nodes)
         {
             init(nodes);
+            // OriginalElements = nodes.Cast<INode>().ToList();
+            OriginalElements = new List<INode>();
 
+            foreach (var node in StartPoints)
+            {
+                node.PropertyChanged += listener;
+            }
+        }
+
+        public void Reset()
+        {
+            ObservableCollection<INode> tempOC = new ObservableCollection<INode>(OriginalElements);
+            init(tempOC);
             foreach (var node in StartPoints)
             {
                 node.PropertyChanged += listener;
