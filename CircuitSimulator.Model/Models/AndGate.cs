@@ -3,6 +3,7 @@ using System.Linq;
 
 namespace CircuitSimulator.Domain.Models
 {
+    [Serializable]
     public class AndGate : Gate
     {
         public override string Type { get => "AND";  }

@@ -4,6 +4,7 @@ using System.Text;
 
 namespace CircuitSimulator.Domain.Models
 {
+    [Serializable]
     public class InputLow : StartPoint
     {
         public InputLow()

@@ -2,9 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Linq;
 using System.ComponentModel;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace CircuitSimulator.Domain.Models
 {
@@ -64,8 +65,8 @@ namespace CircuitSimulator.Domain.Models
         public Circuit(Collection<INode> nodes)
         {
             init(nodes);
-            // OriginalElements = nodes.Cast<INode>().ToList();
             OriginalElements = new List<INode>();
+            OriginalElements = DeepCopy(nodes.ToList());
 
             foreach (var node in StartPoints)
             {
@@ -75,8 +76,8 @@ namespace CircuitSimulator.Domain.Models
 
         public void Reset()
         {
-            ObservableCollection<INode> tempOC = new ObservableCollection<INode>(OriginalElements);
-            init(tempOC);
+            ObservableCollection<INode> tempNodes = new ObservableCollection<INode>(DeepCopy(OriginalElements));
+            init(tempNodes);
             foreach (var node in StartPoints)
             {
                 node.PropertyChanged += listener;
@@ -94,6 +95,17 @@ namespace CircuitSimulator.Domain.Models
         private void listener(object sender, EventArgs e)
         {
             init(Elements);
+        }
+
+        public static T DeepCopy<T>(T item)
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            MemoryStream stream = new MemoryStream();
+            formatter.Serialize(stream, item);
+            stream.Seek(0, SeekOrigin.Begin);
+            T result = (T)formatter.Deserialize(stream);
+            stream.Close();
+            return result;
         }
 
         protected virtual void OnPropertyChanged(string propertyName)

@@ -1,9 +1,11 @@
 ﻿using CircuitSimulator.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace CircuitSimulator.Domain.Models
 {
+    [Serializable]
     public abstract class Gate : INode
     {
         public string Name { get; set; }

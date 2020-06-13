@@ -5,6 +5,7 @@ using System.Text;
 
 namespace CircuitSimulator.Domain.Models
 {
+    [Serializable]
     public class InputHigh : StartPoint
     {
         public InputHigh()

@@ -1,8 +1,10 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using CircuitSimulator.Domain.Interfaces;
 
 namespace CircuitSimulator.Domain.Models
 {
+    [Serializable]
     public class Probe : INode
     {
         public string Name { get; set; }

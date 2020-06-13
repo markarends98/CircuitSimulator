@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace CircuitSimulator.Domain.Models
 {
+    [Serializable]
     public class XorGate : Gate
     {
         public override string Type { get => "XOR"; }
